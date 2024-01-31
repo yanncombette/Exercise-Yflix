@@ -1,0 +1,39 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}User List{% endblock %}
+
+{% block body %}
+<a class="btn btn-primary" href="{{ path('app_back_user_add') }}">Ajouter</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for currentUser in userList %}
+        <tr>
+            <td>{{ currentUser.id }}</td>
+            <td>{{ currentUser.email }}</td>
+            <td>
+            {% for currentRole in currentUser.roles %}
+            {{ currentRole }}, 
+            {% endfor %}
+            </td>
+            <td>
+                <form method="post" action="{{ path('app_back_user_delete', {'id': currentUser.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer');">
+                    <a href="{{ path('app_back_user_edit', {"id": currentUser.id}) }}" class="btn btn-secondary">Modifier</a>
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete-user-' ~ currentUser.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

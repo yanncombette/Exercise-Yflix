@@ -1,0 +1,10 @@
+App\Entity\Movie:
+    movie{1..2}:
+        poster: '<imageUrl(200, 300)>'
+        rating: '<randomFloat(1, 0, 5)>'
+        title: '<catchPhrase()>'
+        type: 'Movie'
+        synopsis: '<realTextBetween(160, 200)>'
+        summary: '<realText(50)>'
+        releaseDate: '<dateTimeThisCentury()>'
+        duration: '<mt_rand(45, 180)>'

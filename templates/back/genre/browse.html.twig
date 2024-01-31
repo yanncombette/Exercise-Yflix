@@ -1,0 +1,33 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Genre List{% endblock %}
+
+{% block body %}
+<a class="btn btn-primary" href="{{ path('app_back_genre_add') }}">Ajouter</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Nom</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for currentGenre in genreList %}
+        <tr>
+            <td>{{ currentGenre.id }}</td>
+            <td>{{ currentGenre.name }}</td>
+            <td>
+                <form method="post" action="{{ path('app_back_genre_delete', {'id': currentGenre.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer');">
+                    <a href="{{ path('app_back_genre_edit', {"id": currentGenre.id}) }}" class="btn btn-secondary">Modifier</a>
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete-genre-' ~ currentGenre.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

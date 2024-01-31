@@ -1,0 +1,27 @@
+html {
+    overflow-y: scroll;
+}
+
+.header-logo__title {
+    color: #e50914;
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 0 0.8em 0 0.3em;
+    text-transform: uppercase;
+}
+
+.movie__poster {
+    background-position: center;
+    background-size: cover;
+}
+
+.movie__poster img {
+    width: 100%;
+}
+
+.movie__favorite {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+

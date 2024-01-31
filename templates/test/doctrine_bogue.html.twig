@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Démo doctrine{% endblock %}
+
+{% block body %}
+    <h1>Demo formulaire</h1>
+
+    <div class="container bg-lighttt pt-5">
+
+        <div class="row mb-2">
+
+            <div class="col">
+
+            {# {{ form(form) }} #}
+
+            {{ form_start(form) }}
+                <button class="btn btn-primary">
+                    Valider le formulaire
+                </button> 
+            {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

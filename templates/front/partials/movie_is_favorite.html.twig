@@ -1,0 +1,5 @@
+{% if movie.id in app.session.get('favorite_movies') %}
+    <a href="{{ path('movie_favorite_toggle', {id: movie.id } )}}" class="movie__favorite fs-1 my-2 mx-3 link-danger"><i class="bi bi-bookmark-x-fill"></i></a>
+{% else %}
+    <a href="{{ path('movie_favorite_toggle', {id: movie.id } )}}" class="movie__favorite fs-1 my-2 mx-3 link-danger"><i class="bi bi-bookmark-plus"></i></a>
+{% endif %}  

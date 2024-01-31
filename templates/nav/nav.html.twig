@@ -1,0 +1,58 @@
+{% block navbar %}
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<div class="container-fluid">
+			<a href="{{ path("home") }}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none header-logo">
+				<img src="{{ asset('favicon.png')}}" height="24" alt="Logo Y'flix">
+				<span class="header-logo__title">Y'flix</span>
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path("home") }}">Accueil</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path("movie_list") }}"><i class="bi bi-film"></i>Films, séries TV</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path("favorites") }}"><i class="bi bi-bookmark"></i>Ma liste</a>
+					</li>
+				</ul>
+				{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+					<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+								<span>{{ app.user.email }}</span>
+								<i class="bi bi-person-square"></i>
+							</a>
+							<ul class="dropdown-menu">
+								<li>
+									<a class="dropdown-item" href="#">Profil</a>
+								</li>
+								<li>
+									<a class="dropdown-item" href="{{ path('app_back_home') }}">Backoffice</a>
+								</li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li>
+									<a class="dropdown-item logout" href="{{ path('app_logout') }}">Déconnexion</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				{% else %}
+					<a class="btn btn-danger me-2" href="{{ path('app_login') }}">Connexion</a>
+				{% endif %}
+				<form class="d-flex" action="{{ path('movie_list') }}" method="GET">
+					<input class="form-control form-control-sm me-2" name="search" type="search" placeholder="Rechercher...">
+					<button class="btn btn-outline-danger" type="submit">
+						<i class="bi bi-search"></i>
+					</button>
+				</form>
+			</div>
+		</div>
+	</nav>
+{% endblock %}

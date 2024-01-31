@@ -1,0 +1,12 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Genre Add{% endblock %}
+
+{% block body %}
+<h1>Ajouter un Genre</h1>
+
+{# todo détailler l'affichage du formulaire #}
+{{ form_start(form, {"attr": {"novalidate": "novalidate"}}) }}
+<button class="btn btn-primary">Ajouter</button>
+{{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,69 @@
+{% extends "base.html.twig" %}
+{% block title %} - {{ movie.title }}{% endblock %}
+{% block body %}
+	<div class="container bg-lighttt pt-5">
+		<div class="row mb-2">
+			<div class="col">
+				<div class="row g-0 borderrr rrrounded overflow-hidden flex-md-row align-items-start mb-4 shadow-smmm position-relative">
+					<div class="col-4 movie__poster img-thumbnail" style="background-image: url({{ movie.poster }});">
+						<img src="{{ asset('images/poster-placeholder.png') }}" class="img-fluid">
+					</div>
+					<div class="col-8 p-4 d-flex flex-column position-static bg-light">
+
+						{{ include('front/partials/movie_is_favorite.html.twig', {current_movie: movie}) }}
+
+						<strong class="d-inline-block mb-2 text-primary">{{ movie.type }}</strong>
+						<h3 class="mb-1">{{ movie.title }}</h3>
+						<div class="mb-1 text-muted">{{ calculated_duration }}</div>
+						<p>
+							{% for genre in movie.genres %}
+								<span class="badge bg-warning text-dark">{{ genre.name }}</span>
+							{% endfor %}
+						</p>
+						<p>
+							{{ movie.synopsis }}
+						</p>
+
+						{% include('front/partials/star_ratings.html.twig') %}
+
+						{% if movie.type == "Série" %}
+							<h2>{{ movie.seasons|length }} Saisons</h2>
+							<ul class="list-unstyled">
+								{% for season in movie.seasons %}
+									<li>
+										<span class="badge bg-danger fs-6 mb-2">Saison {{ season.number }}</span>
+										<small class="ms-1">({{ season.episodesNumber }} épisodes)</small>
+									</li>
+								{% endfor %}
+							</ul>
+						{% endif %}
+						<dl class="row">
+							<dt class="col-sm-12">Avec</dt>
+							<dd class="col-sm-12">
+								{% for casting in movie.castings|sort((movieA, movieB) => movieA.role <=> movieB.role) %}
+									{{ casting.person.firstname }}
+									{{ casting.person.lastname }}
+									({{ casting.role }})<br>
+								{% endfor %}
+							</dd>
+							<dt class="col-sm-12">Pays</dt>
+							<dd class="col-sm-12">USA</dd>
+							<dt class="col-sm-12">Année</dt>
+							<dd class="col-sm-12">{{movie.releaseDate.format('Y')}}</dd>
+						</dl>
+						<h3 class="mb-1">Critiques</h3>
+						{% for review in reviewList %}
+							<p>
+								{{ review.content }}
+								<small>{{ review.username }}</small>
+							</p>
+						{% endfor %}
+						{% if is_granted('MOVIE_REVIEW_ADD', movie) %}
+							<a href="{{ path('movie_review_add', {id:movie.id}) }}" class="btn btn-secondary">Ajouter une critique</a>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

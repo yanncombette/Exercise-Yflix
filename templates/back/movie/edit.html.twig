@@ -1,0 +1,11 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Movie Add{% endblock %}
+
+{% block body %}
+<h1>Modifier {% if movie.type == "Film" %} le film {% else %} la série {% endif %} {{ movie.title }}</h1>
+
+{{ form_start(form, {"attr": {"novalidate": "novalidate"}}) }}
+<button class="btn btn-primary">Modifier</button>
+{{ form_end(form) }}
+{% endblock %}

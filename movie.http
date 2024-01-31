@@ -1,0 +1,33 @@
+
+
+### get api key
+GET http://localhost/Exercise-Yflix/public/api/login_check
+Content-Type: application/json
+
+{
+    "username":"user@yflix.com",
+    "password":"user"
+}
+
+### get movie api with key generated
+GET http://localhost/Exercise-Yflix/public/api/movies/list
+Authorization: bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDY2NTUwMzIsImV4cCI6MTcwNjY1ODYzMiwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQHlmbGl4LmNvbSJ9.OSPi_RSCeS8de1H5VDM6F1ykZUjfwEChOYDD2IlzFafbD8jd4UujipjusFTJ-cDtDB-RY2QkVVTOdS8CadS_ff7eHMmEnQD7H8fi58NuGweUEqKftXoaMnZnvbo0jB0aOZTpHYth0_iunpuW1U9d8LsdNkj08tHZMkKepjS-afJtvzTeZZTohQj_ax-5z4wWi2T-EUH_O7jISnCD6zAzvfE03wEYjEId6TCDIiXbra2yill7SeF4A-CCCbtadN9SgnBaqHkIZ-CrIag1d-JFzWlQZjK13NQw-kJYFu8KafqOKUP2M1yDVBJYNaV9XMgdUbOuvkspimNzGK9c2Tra1A
+
+### add movie
+POST http://localhost/Exercise-Yflix/public/api/movies/create
+Content-Type: application/json
+
+    {
+      "id": 203,
+      "title": "Public-key zerotolerance benchmark",
+      "release_date": "1991-03-08T00:00:00+00:00",
+      "duration": 56,
+      "genres": [],
+      "seasons": [],
+      "type": "Movie",
+      "summary": "Dormouse, and repeated her question. \u0027Why did.",
+      "synopsis": "White Rabbit put on one knee as he spoke, and the other bit. Her chin was pressed hard against it, that attempt proved a failure. Alice heard the Rabbit began. Alice thought this must ever be A.",
+      "poster": "https:\/\/via.placeholder.com\/200x300.png\/00eebb?text=consequatur",
+      "rating": "7",
+      "castings": []
+    }

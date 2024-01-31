@@ -1,0 +1,29 @@
+{% for movie in movie_list %}
+	<div
+		class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm bg-white position-relative">
+
+		<!-- Display image on top for smaller screens -->
+		<div class="col-md-12 col-lg-4 movie__poster" style="background-image: url({{ movie.poster }});">
+			<img src="{{ asset('images/poster-placeholder.png') }}" class="img-fluid">
+		</div>
+
+		<!-- Display image on the left for larger screens -->
+		<div class="col-md-12 col-lg-8 p-4 d-flex flex-column position-static">
+
+			{% include('front/partials/movie_is_favorite.html.twig') %}
+
+			<strong class="d-inline-block mb-2 text-primary">{{ movie.type }}</strong>
+			<h3 class="mb-1">{{ movie.title }}</h3>
+			<div class="mb-1 text-muted">{{ movie.duration|convertMovieDuration }}</div>
+			<p>
+				<small>{{ movie.summary }}</small>
+			</p>
+            
+			{% include('front/partials/star_ratings.html.twig') %}
+
+			<a href="{{ path('movie_show', {id: movie.id}) }}" class="fs-1 mt-3 text-danger align-self-start">
+				<i class="bi bi-arrow-right-square"></i>
+			</a>
+		</div>
+	</div>
+{% endfor %}

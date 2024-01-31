@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Démo formulaire{% endblock %}
+
+{% block body %}
+    <h1>Demo formulaire</h1>
+
+    <div class="container bg-lighttt pt-5">
+
+        <div class="row mb-2">
+
+            <div class="col">
+
+            {# {{ form(seasonForm) }} #}
+
+            {{ form_start(seasonForm) }}
+                {{ form_row(seasonForm.number) }}
+                {{ form_row(seasonForm.movie) }}
+                {{ form_row(seasonForm.episodesNumber) }}
+                <button class="btn btn-primary">
+                    Valider le formulaire
+                </button> 
+            {{ form_end(seasonForm) }}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

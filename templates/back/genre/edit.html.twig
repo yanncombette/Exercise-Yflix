@@ -1,0 +1,11 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Genre Update{% endblock %}
+
+{% block body %}
+<h1>Modifier le genre {{ genre.name }}</h1>
+
+{{ form_start(form, {"attr": {"novalidate": "novalidate"}}) }}
+<button class="btn btn-primary">Modifier</button>
+{{ form_end(form) }}
+{% endblock %}

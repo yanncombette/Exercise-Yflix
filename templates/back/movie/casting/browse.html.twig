@@ -1,0 +1,38 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Casting List for movie {{ movie.title }}{% endblock %}
+
+{% block body %}
+<h1>Casting du movie {{ movie.title }}</h1>
+<a class="btn btn-primary" href="{{ path('app_back_movie_casting_add', {id: movie.id}) }}">Ajouter</a>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>order</th>
+            <th>Role</th>
+            <th>Acteur</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for currentCasting in movie.castings %}
+        <tr>
+            <td>{{ currentCasting.id }}</td>
+            <td>{{ currentCasting.creditOrder }}</td>
+            <td>{{ currentCasting.role }}</td>
+            <td>{{ currentCasting.person.firstName }} {{ currentCasting.person.lastName }}</td>
+            <td>
+                <form method="post" action="{{ path('app_back_movie_delete', {'id': currentCasting.id}) }}" onsubmit="return confirm('Etes vous sur de vouloir supprimer');">
+                    <a href="{{ path('app_back_movie_edit', {"id": currentCasting.id}) }}" class="btn btn-secondary">Modifier</a>
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete-movie-' ~ currentCasting.id) }}">
+                    <button class="btn btn-danger">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

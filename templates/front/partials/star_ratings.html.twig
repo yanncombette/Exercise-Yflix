@@ -1,0 +1,7 @@
+<div class="d-flex" style="color: orange;">
+	{% set stars = movie.rating | star_rating %}
+	{% for star in stars %}
+		<i class="bi {{ star }}"></i>
+	{% endfor %}
+	<span class="ps-1">{{ movie.rating }}</span>
+</div>

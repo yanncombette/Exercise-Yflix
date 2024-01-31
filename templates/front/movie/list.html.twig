@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+{% block title %} - Films&Séries{% endblock %}
+{% block body %}
+	<div class="container-xl bg-light p-5 border-top">
+		<div class="row mb-2">
+
+			{% include('front/partials/genres.html.twig') %}
+
+			<div class="col-12 col-lg-9">
+				<h2 class="text-muted fw-bold mb-4">Les films et séries</h2>
+
+				{{ include('front/partials/movie_list.html.twig') }}
+
+				{% set pagination = generate_pagination(current_page, total_pages) %}
+				<nav class="col-lg-9 offset-lg-3">
+					<ul class="pagination">
+						{% for page in pagination %}
+							<li class="page-item {{ page.class }}">
+								<a class="page-link" href="{{ page.url }}">{{ page.label }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</div>
+{% endblock %}

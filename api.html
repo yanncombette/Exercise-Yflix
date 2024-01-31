@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btConnection">Connexion</button>
+    <button id="btnLoad">Lire les movies</button>
+
+    <ul id="result"></ul>
+    <script>
+        const app = {
+            apiUrl : "http://localhost/Exercise-Yflix/public/api",
+            loginUrl : "http://localhost/Exercise-Yflix/public/api/login_check",
+            jwtToken: "",
+            init: function()
+            {
+                // récupère le token jsw si il existe
+                app.jwtToken = localStorage.getItem('jwt-token');
+                document.querySelector('#btnLoad').addEventListener('click', app.handleLoadMoviesBtnClick);
+                document.querySelector('#btConnection').addEventListener('click', app.handleConnectionBtnClick);
+            },
+            displayMoviesFromList: function (movieList)
+            {
+                const resultDiv = document.querySelector('#result');
+                resultDiv.innerHTML = '';
+
+                for (currentMovie of movieList)
+                {
+                    let ulEl = document.createElement('li');
+                    ulEl.innerHTML = currentMovie.title;
+
+                    resultDiv.appendChild(ulEl);
+                }
+            },
+            handleConnectionBtnClick: function(evt)
+            {
+                fetch(app.loginUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username:"admin@yflix.com",
+                        password:"admin"
+                    })
+                })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function(json)
+                {
+                    console.log(json.token)
+                    localStorage.setItem('jwt-token', json.token);
+                })
+                ;
+            },
+            handleLoadMoviesBtnClick: function(evt)
+            {
+                console.log(app.jwtToken);
+                console.log(app.apiUrl + "/movies");
+                fetch(app.apiUrl + "/movies", {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${app.jwtToken}`
+                    },
+                })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (responseData) {
+                    if (responseData.error)
+                    {
+                        console.log('error');
+                        // gérer les erreurs
+                    }
+                    else
+                    {
+                        console.log(' no error');
+                        console.log(responseData);
+                        return responseData.movies
+                    }
+                })
+                .then(function (movieList) {
+                    app.displayMoviesFromList(movieList)
+                });
+            }
+        }
+        document.addEventListener('DOMContentLoaded', app.init);
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+{% block title %} - {{ movie.title }}{% endblock %}
+{% block body %}
+	<div class="container bg-lighttt pt-5">
+		<div class="row mb-2">
+			<div class="col">
+				<h1>Ajouter une critique sur {{ movie.title }}</h1>
+				{{ form_start(reviewForm, {'attr' : {'novalidate': 'novalidate'} }) }}
+				{{ form_row(reviewForm.username) }}
+				{{ form_row(reviewForm.email) }}
+				{{ form_row(reviewForm.content) }}
+				{{ form_row(reviewForm.rating) }}
+				{{ form_row(reviewForm.reactions) }}
+				{{ form_row(reviewForm.watchedAt) }}
+				<button class="btn btn-primary">Critiquer</button>
+				{{ form_end(reviewForm) }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
